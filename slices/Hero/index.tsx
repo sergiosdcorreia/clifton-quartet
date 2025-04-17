@@ -21,7 +21,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <div className="text-4xl font-bold mb-6">
         <PrismicRichText field={slice.primary.title} />
       </div>
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row lg:w-1/2">
         <div className="flex flex-col gap-4">
           <PrismicRichText field={slice.primary.paragraph1} />
           <PrismicRichText field={slice.primary.paragraph2} />
