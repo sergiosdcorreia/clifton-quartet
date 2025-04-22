@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "vynil": {
+              "type": "SharedSlice"
+            },
             "hero": {
               "type": "SharedSlice"
             }

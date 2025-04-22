@@ -24,3 +24,27 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.record-player-container {
+  background-color: #111;
+  margin: 0 auto;
+  width: 80%;
+  min-height: 100vh;
+}
+
+svg#main {
+  max-width: 100%;
+}
+
+#StartButton {
+  cursor: pointer;
+}
+#volume-knob {
+  cursor: ns-resize;
+}
+#needle-arm {
+  cursor: move;
+}
+#vinyl {
+  cursor: pointer;
+}

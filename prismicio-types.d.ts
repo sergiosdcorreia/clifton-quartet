@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomePageDocumentDataSlicesSlice = HeroSlice;
+type HomePageDocumentDataSlicesSlice = VynilSlice | HeroSlice;
 
 /**
  * Content for Home page documents
@@ -183,6 +183,33 @@ type HeroSliceVariation = HeroSliceDefault;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Default variation for Vynil Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type VynilSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Vynil*
+ */
+type VynilSliceVariation = VynilSliceDefault;
+
+/**
+ * Vynil Shared Slice
+ *
+ * - **API ID**: `vynil`
+ * - **Description**: Vynil
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type VynilSlice = prismic.SharedSlice<"vynil", VynilSliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -212,6 +239,9 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      VynilSlice,
+      VynilSliceVariation,
+      VynilSliceDefault,
     };
   }
 }
