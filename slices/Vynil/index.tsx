@@ -180,13 +180,13 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
   const moveNeedleTo = useCallback(
     (val: number, callback?: () => void): void => {
       if (val < 0) val = 0;
-      if (val > 44) val = 44; // Cap at maximum rotation angle
+      if (val > 44) val = 44;
 
       gsap.to(needleArmRef.current, {
         rotation: val,
         transformOrigin: "22px 62px",
-        duration: 0.3, // Moderate duration for smooth animation
-        ease: "power2.out", // Nicer easing
+        duration: 0.8,
+        ease: "power2.out",
         onComplete: callback,
       });
 
@@ -202,29 +202,6 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
       }
     },
     [needleState]
-  );
-
-  const fadeAudioTo = useCallback(
-    (audio: HTMLAudioElement, targetVolume: number, duration: number): void => {
-      const startVolume = audio.volume;
-      const volumeChange = targetVolume - startVolume;
-      const startTime = performance.now();
-
-      function updateVolume() {
-        const currentTime = performance.now();
-        const elapsed = currentTime - startTime;
-        const percentage = Math.min(elapsed / duration, 1);
-
-        audio.volume = startVolume + volumeChange * percentage;
-
-        if (percentage < 1) {
-          requestAnimationFrame(updateVolume);
-        }
-      }
-
-      requestAnimationFrame(updateVolume);
-    },
-    []
   );
 
   const setVolumeLevel = useCallback(
