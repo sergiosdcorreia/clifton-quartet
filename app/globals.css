@@ -28,12 +28,13 @@ body {
 .record-player-container {
   background-color: #111;
   margin: 0 auto;
-  width: 80%;
+  width: 60%;
   min-height: 100vh;
 }
 
 svg#main {
-  max-width: 100%;
+  max-width: 60%;
+  margin: 0 auto;
 }
 
 #StartButton {
