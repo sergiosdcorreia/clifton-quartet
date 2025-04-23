@@ -66,8 +66,6 @@ const ContactForm = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Entre em Contacto</h2>
-
       {submitSuccess ? (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
           <p>Message sent successfully! We&apos;ll get in touch soon.</p>
