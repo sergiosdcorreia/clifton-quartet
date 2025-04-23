@@ -10,13 +10,17 @@
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
     "@prismicio/client": "^7.17.2",
     "@prismicio/next": "^2.0.1",
     "@prismicio/react": "^3.2.1",
     "gsap": "^3.12.7",
     "next": "15.3.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.1",
+    "resend": "^4.4.0",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

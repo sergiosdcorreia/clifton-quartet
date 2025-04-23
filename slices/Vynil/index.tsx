@@ -13,7 +13,7 @@ if (typeof window !== "undefined") {
 
 // Constants
 const SG_COLOR_OFF = "#4d4d4d";
-const SG_COLOR_ON = "#29ABE2";
+const SG_COLOR_ON = "#FDFE6C";
 
 // Types
 type DraggableInstance = {
@@ -256,7 +256,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
     if (spinState) {
       // Currently spinning so stop it
       if (vinylTweenRef.current) vinylTweenRef.current.pause();
-      gsap.set(startButtonLightRef.current, { fill: SG_COLOR_OFF });
+      gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_OFF });
       gsap.to(recordPlateLightRef.current, { duration: 2, autoAlpha: 0 });
 
       // Stop the sound if necessary
@@ -274,7 +274,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
       // Currently stopped so start it
       setVolumeLevel(volume);
       if (vinylTweenRef.current) vinylTweenRef.current.resume();
-      gsap.set(startButtonLightRef.current, { fill: SG_COLOR_ON });
+      gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_ON });
       gsap.to(recordPlateLightRef.current, {
         duration: 1.4,
         autoAlpha: 1,
@@ -618,7 +618,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
 
             {/* Blue glow when record is playing */}
             <g opacity=".7" id="play-state-ring" ref={recordPlateLightRef}>
-              <circle cx="262.818" cy="218.245" r="175" fill="#29ABE2" />
+              <circle cx="262.818" cy="218.245" r="175" fill="#FDFE6C" />
             </g>
 
             {/* Main vinyl record */}
@@ -665,7 +665,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
                 cx="262.818"
                 cy="218.245"
                 r="60.93"
-                fill="#006299"
+                fill="#FDFE6C"
               />
 
               {/* Record grooves */}
@@ -729,10 +729,10 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
             </linearGradient>
             <circle
               id="start-button_1_"
+              ref={startButtonLightRef}
               cx="98.461"
               cy="400.582"
               r="36.154"
-              fill="url(#start-button_2_)"
               stroke="#0A0A0A"
               strokeWidth="2"
             />
@@ -750,12 +750,11 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
             </g>
             <circle
               id="on-light"
-              ref={startButtonLightRef}
               cx="76.411"
               cy="401.582"
               r="4"
               opacity=".94"
-              fill="#29ABE2"
+              fill="#0A0A0A"
               stroke="#0A0A0A"
             />
           </g>
@@ -953,7 +952,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
                 id="knob-light"
                 ref={volumeKnobLightRef}
                 fill="none"
-                stroke="#29ABE2"
+                stroke="#FDFE6C"
                 strokeWidth="2"
                 d="M518 383h35"
               />
@@ -979,7 +978,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
               <path
                 id="light-level"
                 ref={volumeLightLevelRef}
-                fill="#29ABE2"
+                fill="#FDFE6C"
                 d="M559 329h18v105h-18z"
               />
             </g>
