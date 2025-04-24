@@ -22,9 +22,9 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
     height: 320,
     quantity: 4,
     options: {
-      restitution: 0.5, // Bouncy
+      restitution: 0.3,
       friction: 0.1, // Some friction
-      density: 0.002, // Light
+      density: 0.003, // Light
     },
   };
 
@@ -34,7 +34,7 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
     height: 280,
     quantity: 6,
     options: {
-      restitution: 0.3, // Less bouncy
+      restitution: 0.5,
       friction: 0.05, // Slippery
       density: 0.001, // Very light
     },
@@ -46,9 +46,9 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
     height: 490,
     quantity: 2,
     options: {
-      restitution: 0.4, // Medium bounce
-      friction: 0.15, // More friction
-      density: 0.003, // Heavier
+      restitution: 0.1, // Medium bounce
+      friction: 0.2, // More friction
+      density: 0.006, // Heavier
     },
   };
 

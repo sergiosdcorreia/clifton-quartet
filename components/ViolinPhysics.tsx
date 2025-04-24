@@ -216,8 +216,8 @@ export function ViolinPhysics({
     // Create the violin bow instances if config is provided
     if (violinBowConfig) {
       // Determine quantity based on device type
-      const baseQuantity = violinBowConfig.quantity || 1;
-      const actualQuantity = isMobile ? 1 : baseQuantity;
+      const baseQuantity = violinBowConfig.quantity || 2;
+      const actualQuantity = isMobile ? 2 : baseQuantity;
 
       for (let i = 0; i < actualQuantity; i++) {
         const x = Math.random() * (cw - 100) + 50;
