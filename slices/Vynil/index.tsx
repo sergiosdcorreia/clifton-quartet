@@ -27,8 +27,6 @@ type DraggableInstance = {
   target: HTMLElement | SVGElement;
 };
 
-type TimelineInstance = gsap.core.Timeline;
-
 export type VynilProps = SliceComponentProps<Content.VynilSlice>;
 
 const Vynil: React.FC<VynilProps> = ({ slice }) => {
@@ -66,7 +64,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
   const needleHeadLightsRef = useRef<SVGPathElement[]>([]);
 
   // Animation refs
-  const vinylTweenRef = useRef<TimelineInstance | null>(null);
+  const vinylTweenRef = useRef<gsap.core.Tween | null>(null);
   const volumeKnobTweenRef = useRef<gsap.core.Tween | null>(null);
   const volumeLightLevelTweenRef = useRef<gsap.core.Tween | null>(null);
   const needleArmDraggableRef = useRef<DraggableInstance | null>(null);
@@ -255,7 +253,11 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
   const toggleStartStop = useCallback((): void => {
     if (spinState) {
       // Currently spinning so stop it
-      if (vinylTweenRef.current) vinylTweenRef.current.pause();
+      if (vinylTweenRef.current) {
+        vinylTweenRef.current.kill();
+        vinylTweenRef.current = null; // Clear the reference
+      }
+
       gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_OFF });
       gsap.to(recordPlateLightRef.current, { duration: 2, autoAlpha: 0 });
 
@@ -273,7 +275,23 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
     } else {
       // Currently stopped so start it
       setVolumeLevel(volume);
-      if (vinylTweenRef.current) vinylTweenRef.current.resume();
+
+      // IMPORTANT: Kill any existing draggable transformations before starting animation
+      // This is crucial to avoid conflicts
+      if (vinylDraggableRef.current) {
+        const currentRotation = gsap.getProperty(vinylRef.current, "rotation");
+        // Set the starting position to current rotation to avoid jumps
+        gsap.set(vinylRef.current, { rotation: currentRotation });
+      }
+
+      // Create a completely fresh animation
+      vinylTweenRef.current = gsap.to(vinylRef.current, {
+        rotation: "+=360",
+        duration: 3,
+        ease: "none",
+        repeat: -1,
+      });
+
       gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_ON });
       gsap.to(recordPlateLightRef.current, {
         duration: 1.4,
@@ -289,6 +307,8 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
   }, [
     spinState,
     vinylTweenRef,
+    vinylDraggableRef,
+    vinylRef,
     audioElement,
     setVolumeLevel,
     volume,
@@ -350,12 +370,14 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
     gsap.set(vinylRef.current, { transformOrigin: "50% 50%" });
     gsap.set(needleArmRef.current, { transformOrigin: "22px 62px" });
 
-    // Setup tweens
-    vinylTweenRef.current = gsap.timeline({ repeat: -1, paused: true });
-    vinylTweenRef.current.to(vinylRef.current, {
-      duration: 3,
+    // MODIFIED: Create the vinyl rotation animation as a direct tween instead of timeline
+    // This approach makes it easier to control with play/pause
+    vinylTweenRef.current = gsap.to(vinylRef.current, {
       rotation: "+=360",
+      duration: 3,
       ease: "none",
+      repeat: -1,
+      paused: true,
     });
 
     volumeKnobTweenRef.current = gsap.fromTo(
@@ -446,11 +468,18 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
 
     // Setup Vinyl Draggable for scratching
     if (vinylRef.current) {
+      // The key is to tell Draggable not to apply transforms directly
+      // and instead use our GSAP animation for rotation
       vinylDraggableRef.current = Draggable.create(vinylRef.current, {
         type: "rotation",
+        inertia: false, // Disable inertia to avoid conflicts
         onDragStart: function () {
           setRecordScratch(true);
-          if (vinylTweenRef.current) vinylTweenRef.current.pause();
+          // Kill any existing animation instead of pausing it
+          if (vinylTweenRef.current) {
+            vinylTweenRef.current.kill();
+            vinylTweenRef.current = null; // Important: clear the reference
+          }
 
           if (
             spinState === 1 &&
@@ -469,7 +498,14 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
             audioElement &&
             scratchAudioElement
           ) {
-            if (vinylTweenRef.current) vinylTweenRef.current.resume();
+            // CREATE a new animation from scratch instead of resuming
+            vinylTweenRef.current = gsap.to(vinylRef.current, {
+              rotation: "+=360",
+              duration: 3,
+              ease: "none",
+              repeat: -1,
+            });
+
             scratchAudioElement.pause();
             scratchAudioElement.currentTime = 0;
             audioElement.play();
