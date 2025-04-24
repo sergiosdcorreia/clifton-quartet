@@ -18,8 +18,8 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
 }) => {
   const violinConfig: InstrumentConfig = {
     url: "/images/violin.png",
-    width: 120,
-    height: 220,
+    width: 110,
+    height: 320,
     quantity: 4,
     options: {
       restitution: 0.5, // Bouncy
@@ -42,8 +42,8 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
 
   const celloConfig: InstrumentConfig = {
     url: "/images/cello.png",
-    width: 180,
-    height: 320,
+    width: 160,
+    height: 490,
     quantity: 2,
     options: {
       restitution: 0.4, // Medium bounce
