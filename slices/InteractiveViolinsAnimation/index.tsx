@@ -30,7 +30,7 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
 
   const violinBowConfig: InstrumentConfig = {
     url: "/images/fiddlestick.png",
-    width: 30,
+    width: 20,
     height: 280,
     quantity: 6,
     options: {
