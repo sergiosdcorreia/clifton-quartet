@@ -11,13 +11,25 @@ import {
   World,
 } from "matter-js";
 
+export type InstrumentConfig = {
+  url: string;
+  width: number;
+  height: number;
+  quantity?: number; // Add quantity property
+  options?: Matter.IChamferableBodyDefinition;
+};
+
 type FooterPhysicsProps = {
-  pencilTextureURLs?: string[];
+  violinConfig?: InstrumentConfig;
+  violinBowConfig?: InstrumentConfig;
+  celloConfig?: InstrumentConfig;
   className?: string;
 };
 
-export function FooterPhysics({
-  pencilTextureURLs = [],
+export function ViolinPhysics({
+  violinConfig,
+  violinBowConfig,
+  celloConfig,
   className,
 }: FooterPhysicsProps) {
   const scene = useRef<HTMLDivElement>(null);
@@ -39,10 +51,6 @@ export function FooterPhysics({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const limitedPencilTextures = isMobile
-    ? pencilTextureURLs.slice(0, 3)
-    : pencilTextureURLs;
 
   useEffect(() => {
     const currentScene = scene.current;
@@ -159,36 +167,142 @@ export function FooterPhysics({
     const cw = scene.current.clientWidth;
     const ch = scene.current.clientHeight;
 
-    const repeatedPencilTextures = Array(3).fill(limitedPencilTextures).flat();
+    // Array to collect all objects for later cleanup
+    const allObjects: Matter.Body[] = [];
 
-    const pencils = repeatedPencilTextures.map((texture) => {
-      const x = Math.random() * cw;
-      const y = Math.random() * (ch / 2 - 100) + 50;
-      const rotation = ((Math.random() * 100 - 50) * Math.PI) / 180;
+    // Create the violin instances if config is provided
+    if (violinConfig) {
+      // Determine quantity based on device type
+      const baseQuantity = violinConfig.quantity || 1;
+      const actualQuantity = isMobile ? 1 : baseQuantity;
 
-      return Bodies.rectangle(x, y, 15, 260, {
-        chamfer: { radius: 5 },
-        angle: rotation,
-        restitution: 0.8,
-        friction: 0.005,
-        render: {
-          sprite: {
-            texture,
-            xScale: 0.5,
-            yScale: 0.5,
-          },
-        },
-      });
-    });
+      for (let i = 0; i < actualQuantity; i++) {
+        const x = Math.random() * (cw - 100) + 50;
+        const y = Math.random() * (ch / 3) + 50;
+        const rotation = ((Math.random() * 60 - 30) * Math.PI) / 180;
 
-    if (pencils.length > 0) {
-      World.add(engine.current.world, pencils);
+        // Default violin options if not provided
+        const defaultOptions = {
+          chamfer: { radius: 15 },
+          angle: rotation,
+          restitution: 0.5,
+          friction: 0.1,
+          density: 0.002, // Lower density to make it float better
+        };
+
+        const violinBody = Bodies.rectangle(
+          x,
+          y,
+          violinConfig.width,
+          violinConfig.height,
+          {
+            ...defaultOptions,
+            ...violinConfig.options,
+            render: {
+              sprite: {
+                texture: violinConfig.url,
+                xScale: 1,
+                yScale: 1,
+              },
+            },
+          }
+        );
+
+        World.add(world, violinBody);
+        allObjects.push(violinBody);
+      }
+    }
+
+    // Create the violin bow instances if config is provided
+    if (violinBowConfig) {
+      // Determine quantity based on device type
+      const baseQuantity = violinBowConfig.quantity || 1;
+      const actualQuantity = isMobile ? 1 : baseQuantity;
+
+      for (let i = 0; i < actualQuantity; i++) {
+        const x = Math.random() * (cw - 100) + 50;
+        const y = Math.random() * (ch / 3) + 50;
+        const rotation = ((Math.random() * 90 - 45) * Math.PI) / 180;
+
+        // Bow is longer and thinner
+        const defaultOptions = {
+          chamfer: { radius: 5 },
+          angle: rotation,
+          restitution: 0.3,
+          friction: 0.05,
+          density: 0.001, // Very light
+        };
+
+        const bowBody = Bodies.rectangle(
+          x,
+          y,
+          violinBowConfig.width,
+          violinBowConfig.height,
+          {
+            ...defaultOptions,
+            ...violinBowConfig.options,
+            render: {
+              sprite: {
+                texture: violinBowConfig.url,
+                xScale: 1,
+                yScale: 1,
+              },
+            },
+          }
+        );
+
+        World.add(world, bowBody);
+        allObjects.push(bowBody);
+      }
+    }
+
+    // Create the cello instances if config is provided
+    if (celloConfig) {
+      // Determine quantity based on device type
+      const baseQuantity = celloConfig.quantity || 1;
+      const actualQuantity = isMobile ? 1 : baseQuantity;
+
+      for (let i = 0; i < actualQuantity; i++) {
+        const x = Math.random() * (cw - 150) + 75;
+        const y = Math.random() * (ch / 3) + 50;
+        const rotation = ((Math.random() * 40 - 20) * Math.PI) / 180;
+
+        // Cello is larger and heavier
+        const defaultOptions = {
+          chamfer: { radius: 20 },
+          angle: rotation,
+          restitution: 0.4,
+          friction: 0.15,
+          density: 0.003, // Heavier than violin
+        };
+
+        const celloBody = Bodies.rectangle(
+          x,
+          y,
+          celloConfig.width,
+          celloConfig.height,
+          {
+            ...defaultOptions,
+            ...celloConfig.options,
+            render: {
+              sprite: {
+                texture: celloConfig.url,
+                xScale: 1,
+                yScale: 1,
+              },
+            },
+          }
+        );
+
+        World.add(world, celloBody);
+        allObjects.push(celloBody);
+      }
     }
 
     return () => {
-      World.remove(world, pencils);
+      World.remove(world, allObjects);
     };
-  }, [limitedPencilTextures, inView]);
+  }, [violinConfig, violinBowConfig, celloConfig, inView, isMobile]);
 
   return <div ref={scene} className={className} />;
 }
