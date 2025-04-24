@@ -3,7 +3,11 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  carousel: dynamic(() => import("./Carousel")),
   contact: dynamic(() => import("./Contact")),
   hero: dynamic(() => import("./Hero")),
-  vynil: dynamic(() => import("./Vynil")),
+  interactive_violins_animation: dynamic(
+    () => import("./InteractiveViolinsAnimation"),
+  ),
+  vynil: dynamic(() => import("./Vinyl")),
 };

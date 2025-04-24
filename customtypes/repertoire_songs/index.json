@@ -1,0 +1,32 @@
+{
+  "format": "custom",
+  "id": "repertoire_songs",
+  "label": "Repertoire Songs",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "album_image": {
+        "type": "Image",
+        "config": {
+          "label": "Album Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "song_artist_and_name": {
+        "type": "Text",
+        "config": {
+          "label": "Song Artist and Name",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}

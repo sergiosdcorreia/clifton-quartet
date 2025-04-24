@@ -1,7 +1,7 @@
 {
   "id": "vynil",
   "type": "SharedSlice",
-  "name": "Vynil",
+  "name": "Vinyl",
   "description": "Vynil",
   "variations": [
     {
@@ -10,7 +10,9 @@
       "docURL": "...",
       "version": "initial",
       "description": "Default",
-      "imageUrl": ""
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
     }
   ]
 }

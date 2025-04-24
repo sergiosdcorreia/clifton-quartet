@@ -1,0 +1,43 @@
+{
+  "id": "carousel",
+  "type": "SharedSlice",
+  "name": "Carousel",
+  "description": "Carousel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "repertoire_songs": {
+          "type": "Group",
+          "config": {
+            "label": "Repertoire Songs",
+            "repeat": true,
+            "fields": {
+              "album_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Album Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "song_artist_and_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Song Artist and Name",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

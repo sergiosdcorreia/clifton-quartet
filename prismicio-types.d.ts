@@ -4,7 +4,12 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomePageDocumentDataSlicesSlice = ContactSlice | VynilSlice | HeroSlice;
+type HomePageDocumentDataSlicesSlice =
+  | InteractiveViolinsAnimationSlice
+  | CarouselSlice
+  | ContactSlice
+  | VynilSlice
+  | HeroSlice;
 
 /**
  * Content for Home page documents
@@ -69,7 +74,122 @@ export type HomePageDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomePageDocument;
+/**
+ * Content for Repertoire Songs documents
+ */
+interface RepertoireSongsDocumentData {
+  /**
+   * Album Image field in *Repertoire Songs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire_songs.album_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  album_image: prismic.ImageField<never>;
+
+  /**
+   * Song Artist and Name field in *Repertoire Songs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: repertoire_songs.song_artist_and_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_artist_and_name: prismic.KeyTextField;
+}
+
+/**
+ * Repertoire Songs document from Prismic
+ *
+ * - **API ID**: `repertoire_songs`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type RepertoireSongsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<RepertoireSongsDocumentData>,
+    "repertoire_songs",
+    Lang
+  >;
+
+export type AllDocumentTypes = HomePageDocument | RepertoireSongsDocument;
+
+/**
+ * Item in *Carousel → Default → Primary → Repertoire Songs*
+ */
+export interface CarouselSliceDefaultPrimaryRepertoireSongsItem {
+  /**
+   * Album Image field in *Carousel → Default → Primary → Repertoire Songs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: carousel.default.primary.repertoire_songs[].album_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  album_image: prismic.ImageField<never>;
+
+  /**
+   * Song Artist and Name field in *Carousel → Default → Primary → Repertoire Songs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: carousel.default.primary.repertoire_songs[].song_artist_and_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  song_artist_and_name: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Carousel → Default → Primary*
+ */
+export interface CarouselSliceDefaultPrimary {
+  /**
+   * Repertoire Songs field in *Carousel → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: carousel.default.primary.repertoire_songs[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  repertoire_songs: prismic.GroupField<
+    Simplify<CarouselSliceDefaultPrimaryRepertoireSongsItem>
+  >;
+}
+
+/**
+ * Default variation for Carousel Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CarouselSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CarouselSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Carousel*
+ */
+type CarouselSliceVariation = CarouselSliceDefault;
+
+/**
+ * Carousel Shared Slice
+ *
+ * - **API ID**: `carousel`
+ * - **Description**: Carousel
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CarouselSlice = prismic.SharedSlice<
+  "carousel",
+  CarouselSliceVariation
+>;
 
 /**
  * Default variation for Contact Slice
@@ -214,7 +334,54 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
- * Default variation for Vynil Slice
+ * Primary content in *InteractiveViolinsAnimation → Default → Primary*
+ */
+export interface InteractiveViolinsAnimationSliceDefaultPrimary {
+  /**
+   * Background Image field in *InteractiveViolinsAnimation → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: interactive_violins_animation.default.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  background_image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for InteractiveViolinsAnimation Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type InteractiveViolinsAnimationSliceDefault =
+  prismic.SharedSliceVariation<
+    "default",
+    Simplify<InteractiveViolinsAnimationSliceDefaultPrimary>,
+    never
+  >;
+
+/**
+ * Slice variation for *InteractiveViolinsAnimation*
+ */
+type InteractiveViolinsAnimationSliceVariation =
+  InteractiveViolinsAnimationSliceDefault;
+
+/**
+ * InteractiveViolinsAnimation Shared Slice
+ *
+ * - **API ID**: `interactive_violins_animation`
+ * - **Description**: InteractiveViolinsAnimation
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type InteractiveViolinsAnimationSlice = prismic.SharedSlice<
+  "interactive_violins_animation",
+  InteractiveViolinsAnimationSliceVariation
+>;
+
+/**
+ * Default variation for Vinyl Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -227,12 +394,12 @@ export type VynilSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *Vynil*
+ * Slice variation for *Vinyl*
  */
 type VynilSliceVariation = VynilSliceDefault;
 
 /**
- * Vynil Shared Slice
+ * Vinyl Shared Slice
  *
  * - **API ID**: `vynil`
  * - **Description**: Vynil
@@ -264,7 +431,14 @@ declare module "@prismicio/client" {
       HomePageDocument,
       HomePageDocumentData,
       HomePageDocumentDataSlicesSlice,
+      RepertoireSongsDocument,
+      RepertoireSongsDocumentData,
       AllDocumentTypes,
+      CarouselSlice,
+      CarouselSliceDefaultPrimaryRepertoireSongsItem,
+      CarouselSliceDefaultPrimary,
+      CarouselSliceVariation,
+      CarouselSliceDefault,
       ContactSlice,
       ContactSliceVariation,
       ContactSliceDefault,
@@ -272,6 +446,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      InteractiveViolinsAnimationSlice,
+      InteractiveViolinsAnimationSliceDefaultPrimary,
+      InteractiveViolinsAnimationSliceVariation,
+      InteractiveViolinsAnimationSliceDefault,
       VynilSlice,
       VynilSliceVariation,
       VynilSliceDefault,
