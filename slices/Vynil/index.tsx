@@ -253,10 +253,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
   const toggleStartStop = useCallback((): void => {
     if (spinState) {
       // Currently spinning so stop it
-      if (vinylTweenRef.current) {
-        vinylTweenRef.current.kill();
-        vinylTweenRef.current = null; // Clear the reference
-      }
+      gsap.killTweensOf(vinylRef.current);
 
       gsap.set(startButtonLightRef.current, { stroke: SG_COLOR_OFF });
       gsap.to(recordPlateLightRef.current, { duration: 2, autoAlpha: 0 });
@@ -285,7 +282,7 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
       }
 
       // Create a completely fresh animation
-      vinylTweenRef.current = gsap.to(vinylRef.current, {
+      gsap.to(vinylRef.current, {
         rotation: "+=360",
         duration: 3,
         ease: "none",
@@ -306,7 +303,6 @@ const Vynil: React.FC<VynilProps> = ({ slice }) => {
     }
   }, [
     spinState,
-    vinylTweenRef,
     vinylDraggableRef,
     vinylRef,
     audioElement,
