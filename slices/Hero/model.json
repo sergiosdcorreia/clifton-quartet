@@ -12,75 +12,19 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "title": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Title",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "heading2,strong,em"
-          }
-        },
-        "paragraph1": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Paragraph1",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "paragraph2": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Paragraph2",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "paragraph3": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Paragraph3",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "paragraph4": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Paragraph4",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "paragraph5": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Paragraph5",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "paragraph6": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Paragraph6",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
-        "image": {
+        "background_image": {
           "type": "Image",
           "config": {
-            "label": "Image",
+            "label": "Background Image",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "The Clifton String Quartet"
           }
         }
       },

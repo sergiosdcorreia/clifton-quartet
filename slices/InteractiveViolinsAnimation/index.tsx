@@ -58,7 +58,7 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
       data-slice-variation={slice.variation}
       className="flex justify-center"
     >
-      <div className="relative h-[75vh] xl:h-[100vh] w-full xl:w-[75vw] ~p-10/16">
+      <div className="relative h-[75vh] xl:h-[100vh] w-full xl:w-[75vw] max-w-[1920px] ~p-10/16">
         <PrismicNextImage
           field={slice.primary.background_image}
           alt=""
@@ -70,7 +70,7 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
           violinConfig={violinConfig}
           violinBowConfig={violinBowConfig}
           celloConfig={celloConfig}
-          className="absolute inset-0 pointer-events-auto" // pointer-events-auto to allow interaction
+          className="absolute inset-0 pointer-events-auto"
         />
       </div>
     </section>

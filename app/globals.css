@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-instrument-serif: "Instrument Serif", serif;
 }
 
 body,
@@ -31,7 +30,7 @@ html {
 body {
   background: #111111;
   color: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-instrument-serif);
 }
 
 .record-player-container {

@@ -5,11 +5,11 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomePageDocumentDataSlicesSlice =
+  | HeroSlice
   | InteractiveViolinsAnimationSlice
   | CarouselSlice
   | ContactSlice
-  | VynilSlice
-  | HeroSlice;
+  | VynilSlice;
 
 /**
  * Content for Home page documents
@@ -226,84 +226,24 @@ export type ContactSlice = prismic.SharedSlice<
  */
 export interface HeroSliceDefaultPrimary {
   /**
-   * Title field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.RichTextField;
-
-  /**
-   * Paragraph1 field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.paragraph1
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph1: prismic.RichTextField;
-
-  /**
-   * Paragraph2 field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.paragraph2
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph2: prismic.RichTextField;
-
-  /**
-   * Paragraph3 field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.paragraph3
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph3: prismic.RichTextField;
-
-  /**
-   * Paragraph4 field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.paragraph4
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph4: prismic.RichTextField;
-
-  /**
-   * Paragraph5 field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.paragraph5
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph5: prismic.RichTextField;
-
-  /**
-   * Paragraph6 field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.paragraph6
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  paragraph6: prismic.RichTextField;
-
-  /**
-   * Image field in *Hero → Default → Primary*
+   * Background Image field in *Hero → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.image
+   * - **API ID Path**: hero.default.primary.background_image
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  image: prismic.ImageField<never>;
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: The Clifton String Quartet
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
 }
 
 /**

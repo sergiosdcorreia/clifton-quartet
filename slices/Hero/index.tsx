@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { PrismicNextImage } from "@prismicio/next";
+import { SliceComponentProps } from "@prismicio/react";
 
 /**
  * Props for `Hero`.
@@ -16,23 +15,16 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-10"
+      className="h-[100vh]"
     >
-      <div className="text-4xl font-bold mb-6">
-        <PrismicRichText field={slice.primary.title} />
-      </div>
-      <div className="flex flex-col lg:flex-row gap-4">
-        <div className="flex flex-col gap-4 lg:w-1/2">
-          <PrismicRichText field={slice.primary.paragraph1} />
-          <PrismicRichText field={slice.primary.paragraph2} />
-          <PrismicRichText field={slice.primary.paragraph3} />
-          <PrismicRichText field={slice.primary.paragraph4} />
-          <PrismicRichText field={slice.primary.paragraph5} />
-          <PrismicRichText field={slice.primary.paragraph6} />
-        </div>
-        <div className="w-full lg:w-1/2">
-          <PrismicNextImage field={slice.primary.image} />
-        </div>
+      <div
+        className="relative h-full w-full bg-cover bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url(${slice.primary.background_image.url})`,
+        }}
+      ></div>
+      <div className="absolute bottom-8 left-8 text-8xl">
+        {slice.primary.title}
       </div>
     </section>
   );

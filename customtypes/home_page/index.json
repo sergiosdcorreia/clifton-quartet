@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "hero": {
+              "type": "SharedSlice"
+            },
             "interactive_violins_animation": {
               "type": "SharedSlice"
             },
@@ -21,9 +24,6 @@
               "type": "SharedSlice"
             },
             "vynil": {
-              "type": "SharedSlice"
-            },
-            "hero": {
               "type": "SharedSlice"
             }
           }
