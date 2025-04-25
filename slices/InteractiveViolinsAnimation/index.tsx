@@ -58,7 +58,7 @@ const InteractiveViolinsAnimation: FC<InteractiveViolinsAnimationProps> = ({
       data-slice-variation={slice.variation}
       className="flex justify-center"
     >
-      <div className="relative h-[75vh] lg:h-[100vh] w-100 lg:w-[75vw] ~p-10/16">
+      <div className="relative h-[75vh] xl:h-[100vh] w-full xl:w-[75vw] ~p-10/16">
         <PrismicNextImage
           field={slice.primary.background_image}
           alt=""
