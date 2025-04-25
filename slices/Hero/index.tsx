@@ -15,7 +15,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="h-[100vh]"
+      className="h-[100vh] overflow-hidden"
     >
       <div
         className="relative h-full w-full bg-cover bg-no-repeat bg-center"
@@ -23,7 +23,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           backgroundImage: `url(${slice.primary.background_image.url})`,
         }}
       ></div>
-      <div className="absolute bottom-8 left-8 text-7xl lg:text-8xl xl:text-9xl select-none">
+      <div className="absolute bottom-8 left-8 text-7xl md:text-8xl pr-32 sm:pr-0 xl:text-9xl select-none">
         {slice.primary.title}
       </div>
     </section>
