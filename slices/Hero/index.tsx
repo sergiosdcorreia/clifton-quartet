@@ -19,19 +19,14 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Create a timeline for our animations
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    // Background image fade in
     tl.fromTo(
       backgroundRef.current,
       { opacity: 0 },
       { opacity: 1, duration: 1.5 }
     );
 
-    // Title animation - different approach for mobile vs desktop
-    // For mobile, use a simple fade-up animation without clip-path
-    // to avoid issues with the 190px fixed width
     tl.fromTo(
       titleRef.current,
       {
@@ -46,7 +41,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       "-=0.8"
     );
 
-    // Clean up GSAP animations on component unmount
     return () => {
       tl.kill();
     };

@@ -1,5 +1,6 @@
 import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { ReactLenis } from "@/utils/lenis";
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -14,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${instrumentSerif.variable} antialiased`}>
-        {children}
-      </body>
+      <ReactLenis root>
+        <body className={`${instrumentSerif.variable} antialiased`}>
+          {children}
+        </body>
+      </ReactLenis>
     </html>
   );
 }
