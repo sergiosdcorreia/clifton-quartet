@@ -23,7 +23,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           backgroundImage: `url(${slice.primary.background_image.url})`,
         }}
       ></div>
-      <div className="absolute bottom-8 left-8 text-7xl md:text-8xl pr-32 sm:pr-0 xl:text-9xl select-none">
+      <div className="absolute title-mobile bottom-8 left-8 text-8xl xl:text-9xl select-none">
         {slice.primary.title}
       </div>
     </section>
