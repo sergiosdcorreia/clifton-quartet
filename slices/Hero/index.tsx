@@ -57,7 +57,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="h-[100vh] overflow-hidden relative"
+      className="h-dvh overflow-hidden relative"
     >
       <div
         ref={backgroundRef}
