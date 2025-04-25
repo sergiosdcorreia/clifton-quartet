@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, FC } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import CarouselItem from "@/components/CarouselItem";
 import gsap from "gsap";
 
@@ -64,21 +64,30 @@ const Carousel: FC<CarouselProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="relative min-h-[100vh] w-full overflow-hidden bg-cover bg-center flex flex-col justify-center items-center p-4"
+      style={{
+        backgroundImage: `url(${slice.primary.background_image.url})`,
+      }}
     >
-      <div className="w-full overflow-hidden">
-        <div
-          className="flex items-start"
-          ref={containerRef}
-          style={{ willChange: "transform" }}
-        >
-          {allItems.map((item, index) => (
-            <CarouselItem
-              key={index}
-              image={item.album_image}
-              caption={item.song_artist_and_name}
-            />
-          ))}
-        </div>
+      <div className="absolute min-h-[100vh] inset-0 bg-slate-950 opacity-40" />
+      <h2 className="relative text-white text-center text-7xl mb-6">
+        {slice.primary.carousel_title}
+      </h2>
+      <div className="relative text-white text-center mb-12 max-w-4xl text-2xl">
+        <PrismicRichText field={slice.primary.text} />
+      </div>
+      <div
+        className="flex items-start"
+        ref={containerRef}
+        style={{ willChange: "transform" }}
+      >
+        {allItems.map((item, index) => (
+          <CarouselItem
+            key={index}
+            image={item.album_image}
+            caption={item.song_artist_and_name}
+          />
+        ))}
       </div>
     </section>
   );

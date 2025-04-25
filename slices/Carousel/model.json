@@ -12,6 +12,30 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "background_image": {
+          "type": "Image",
+          "config": {
+            "label": "Background Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "carousel_title": {
+          "type": "Text",
+          "config": {
+            "label": "Carousel Title",
+            "placeholder": "Repertoire"
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        },
         "repertoire_songs": {
           "type": "Group",
           "config": {

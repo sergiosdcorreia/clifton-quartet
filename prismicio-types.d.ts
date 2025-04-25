@@ -149,6 +149,36 @@ export interface CarouselSliceDefaultPrimaryRepertoireSongsItem {
  */
 export interface CarouselSliceDefaultPrimary {
   /**
+   * Background Image field in *Carousel → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: carousel.default.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Carousel Title field in *Carousel → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Repertoire
+   * - **API ID Path**: carousel.default.primary.carousel_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  carousel_title: prismic.KeyTextField;
+
+  /**
+   * Text field in *Carousel → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: carousel.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+
+  /**
    * Repertoire Songs field in *Carousel → Default → Primary*
    *
    * - **Field Type**: Group
