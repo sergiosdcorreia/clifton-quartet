@@ -24,7 +24,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     tl.fromTo(
       backgroundRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 1.5 }
+      { opacity: 1, duration: 2 }
     );
 
     tl.fromTo(
@@ -36,7 +36,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       {
         y: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 2.5,
       },
       "-=0.8"
     );
